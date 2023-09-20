@@ -1,6 +1,6 @@
 object FrmLocEmpresa: TFrmLocEmpresa
-  Left = 447
-  Top = 185
+  Left = 386
+  Top = 155
   Caption = 'Localiza'#231#227'o de empresas...'
   ClientHeight = 418
   ClientWidth = 524
@@ -55,6 +55,55 @@ object FrmLocEmpresa: TFrmLocEmpresa
     TitleFont.Height = -12
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'T001_CODIGO'
+        Title.Caption = 'Codigo'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'T001_NOME'
+        Title.Caption = 'Nome'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'T001_RAZAO_SOCIAL'
+        Title.Caption = 'Raz'#227'o Social'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'T001_ENDERECO'
+        Title.Caption = 'Endere'#231'o'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'T001_NUMERO'
+        Title.Caption = 'Numero'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'T001_BAIRRO'
+        Title.Caption = 'Bairro'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'T001_CNPJ'
+        Title.Caption = 'CNPJ'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'T001_IE'
+        Title.Caption = 'Inscri'#231#227'o Estadual'
+        Visible = True
+      end>
   end
   object Panel2: TPanel
     Left = 0
@@ -264,10 +313,10 @@ object FrmLocEmpresa: TFrmLocEmpresa
     TabOrder = 2
   end
   object Qr: TSQLQuery
-    MaxBlobSize = -1
+    MaxBlobSize = 1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'T001_CODIGO'
         ParamType = ptInput
       end>
@@ -279,29 +328,101 @@ object FrmLocEmpresa: TFrmLocEmpresa
       'T001_ENDERECO,'
       'T001_NUMERO,'
       'T001_BAIRRO,'
+      'T001_COMPLEMENTO,'
       'T001_CNPJ,'
-      'T001_IE'
+      'T001_IE,'
+      'T001_TELEFONE,'
+      'T001_CELULAR,'
+      'T001_EMAIL,'
+      'T001_LOGO,'
+      'T003_CODIGO'
       'FROM T001_EMPRESA'
-      'WHERE T001_CODIGO =:T001_CODIGO')
+      'WHERE'
+      'T001_CODIGO = :T001_CODIGO')
     SQLConnection = DmDados.Conexao
-    Left = 352
-    Top = 10
-  end
-  object Ds: TDataSource
-    DataSet = Cds
-    Left = 472
-    Top = 11
-  end
-  object Cds: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'Dsp'
-    Left = 432
-    Top = 11
+    Left = 364
+    Top = 16
+    object QrT001_CODIGO: TIntegerField
+      FieldName = 'T001_CODIGO'
+      Required = True
+    end
+    object QrT001_NOME: TStringField
+      FieldName = 'T001_NOME'
+      Size = 100
+    end
+    object QrT001_RAZAO_SOCIAL: TStringField
+      FieldName = 'T001_RAZAO_SOCIAL'
+      Size = 100
+    end
+    object QrT001_ENDERECO: TStringField
+      FieldName = 'T001_ENDERECO'
+      Size = 100
+    end
+    object QrT001_NUMERO: TStringField
+      FieldName = 'T001_NUMERO'
+      Size = 50
+    end
+    object QrT001_BAIRRO: TStringField
+      FieldName = 'T001_BAIRRO'
+      Size = 50
+    end
+    object QrT001_CNPJ: TStringField
+      FieldName = 'T001_CNPJ'
+      Size = 50
+    end
+    object QrT001_IE: TStringField
+      FieldName = 'T001_IE'
+      Size = 50
+    end
   end
   object Dsp: TDataSetProvider
     DataSet = Qr
-    Left = 392
-    Top = 11
+    Left = 402
+    Top = 15
+  end
+  object Cds: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'Dsp'
+    Left = 440
+    Top = 16
+    object CdsT001_CODIGO: TIntegerField
+      FieldName = 'T001_CODIGO'
+      Required = True
+    end
+    object CdsT001_NOME: TStringField
+      FieldName = 'T001_NOME'
+      Size = 100
+    end
+    object CdsT001_RAZAO_SOCIAL: TStringField
+      FieldName = 'T001_RAZAO_SOCIAL'
+      Size = 100
+    end
+    object CdsT001_ENDERECO: TStringField
+      FieldName = 'T001_ENDERECO'
+      Size = 100
+    end
+    object CdsT001_NUMERO: TStringField
+      FieldName = 'T001_NUMERO'
+      Size = 50
+    end
+    object CdsT001_BAIRRO: TStringField
+      FieldName = 'T001_BAIRRO'
+      Size = 50
+    end
+    object CdsT001_CNPJ: TStringField
+      FieldName = 'T001_CNPJ'
+      Size = 50
+    end
+    object CdsT001_IE: TStringField
+      FieldName = 'T001_IE'
+      Size = 50
+    end
+  end
+  object Ds: TDataSource
+    DataSet = Cds
+    Left = 477
+    Top = 15
   end
 end

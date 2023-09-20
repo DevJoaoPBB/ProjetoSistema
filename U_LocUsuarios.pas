@@ -22,6 +22,9 @@ type
     CdsT002_CODIGO: TIntegerField;
     CdsT002_LOGIN: TStringField;
     CdsT002_SENHA: TStringField;
+    QrT002_CODIGO: TIntegerField;
+    QrT002_LOGIN: TStringField;
+    QrT002_SENHA: TStringField;
     procedure EdtLocalizarChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BtSairClick(Sender: TObject);

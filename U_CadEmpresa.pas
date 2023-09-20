@@ -20,36 +20,6 @@ type
     P1: TPanel;
     Label4: TLabel;
     EdtCodigo: TEdit;
-    Pg1: TPageControl;
-    TbDadosPrinc: TTabSheet;
-    TbDadosAdc: TTabSheet;
-    TbLogo: TTabSheet;
-    EdtNome: TEdit;
-    Label1: TLabel;
-    Label2: TLabel;
-    EdtRS: TEdit;
-    Label3: TLabel;
-    Label5: TLabel;
-    EdtEnde: TEdit;
-    EdtNr: TEdit;
-    Label6: TLabel;
-    EdtBairro: TEdit;
-    Label7: TLabel;
-    EdtComp: TEdit;
-    Label8: TLabel;
-    EdtCNPJ: TEdit;
-    Label9: TLabel;
-    EdtIE: TEdit;
-    Label10: TLabel;
-    EdtTelefone: TEdit;
-    Label11: TLabel;
-    EdtCelular: TEdit;
-    Label12: TLabel;
-    EdtCodCid: TEdit;
-    EdtNomeCid: TEdit;
-    Label13: TLabel;
-    EdtEmail: TEdit;
-    Panel3: TPanel;
     Qr: TSQLDataSet;
     QrT001_CODIGO: TIntegerField;
     QrT001_NOME: TStringField;
@@ -65,10 +35,6 @@ type
     QrT001_EMAIL: TStringField;
     QrT003_CODIGO: TIntegerField;
     QrCidade: TSQLDataSet;
-    Label14: TLabel;
-    EdtUf: TEdit;
-    Label15: TLabel;
-    EdtCep: TMaskEdit;
     QrCidadeT003_CODIGO: TIntegerField;
     QrCidadeT003_NOME: TStringField;
     QrCidadeT003_UF: TStringField;
@@ -76,8 +42,41 @@ type
     QrCidadeT003_CEP: TStringField;
     Opd1: TOpenPictureDialog;
     QrT001_LOGO: TBlobField;
+    Pg1: TPageControl;
+    TbDadosPrinc: TTabSheet;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    EdtNome: TEdit;
+    EdtRS: TEdit;
+    EdtEnde: TEdit;
+    EdtNr: TEdit;
+    EdtBairro: TEdit;
+    EdtComp: TEdit;
+    EdtCNPJ: TEdit;
+    EdtIE: TEdit;
+    EdtTelefone: TEdit;
+    EdtCelular: TEdit;
+    EdtCodCid: TEdit;
+    EdtNomeCid: TEdit;
+    EdtEmail: TEdit;
+    EdtUf: TEdit;
+    EdtCep: TMaskEdit;
+    TbLogo: TTabSheet;
+    Label16: TLabel;
+    Panel3: TPanel;
     img: TImage;
-    Edtlg: TEdit;
     procedure FormResize(Sender: TObject);
     procedure BtSairClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -143,6 +142,7 @@ begin
     EdtIE.ReadOnly      := False;
     EdtTelefone.ReadOnly:= False;
     EdtCelular.ReadOnly := False;
+    Img.Enabled         := True;
   end;
 
   if Valor = 'C' then
@@ -168,6 +168,7 @@ begin
     EdtIE.ReadOnly      := True;
     EdtTelefone.ReadOnly:= True;
     EdtCelular.ReadOnly := True;
+    Img.Enabled         := False;
   end;
 end;
 
@@ -180,7 +181,6 @@ begin
   bmp:= Tbitmap.Create;
   bmp.LoadFromFile(Opd1.FileName);
   img.Picture.Bitmap.Assign(bmp);
-  Edtlg.Text := Opd1.FileName;
   bmp.Free;
   end;
 
@@ -217,8 +217,7 @@ begin
         EdtTelefone.Text     := FieldByName('T001_TELEFONE').AsString;
         EdtCelular.Text      := FieldByName('T001_CELULAR').AsString;
         EdtEmail.Text        := FieldByName('T001_EMAIL').AsString;
-        Edtlg.Text           := FieldByName('T001_LOGO').AsString;
-        img.Picture.LoadFromFile(Edtlg.Text);
+        Img.Picture.Assign(QrT001_LOGO);
         EdtCodCid.Text       := FieldByName('T003_CODIGO').AsString;
         EdtNomeCid.Text      := QrCidade.FieldByName('T003_NOME').AsString;
         EdtUf.Text           := QrCidade.FieldByName('T003_UF').AsString;
@@ -283,7 +282,6 @@ begin
   if FrmCadEmpresa.Components[i] is TEdit then
   (FrmCadEmpresa.Components[i] as TEdit).Clear;
   EdtCep.Clear;
-  Edtlg.Clear;
   img.Picture :=Nil;
   end;
 end;
@@ -421,7 +419,7 @@ begin
             ParamByName('T001_TELEFONE').AsString     :=EdtTelefone.Text;
             ParamByName('T001_CELULAR').AsString      :=EdtCelular.Text;
             ParamByName('T001_EMAIL').AsString        :=EdtEmail.Text;
-            ParamByName('T001_LOGO').AsString         :=Edtlg.Text;
+            ParamByName('T001_LOGO').Assign(img.Picture.Graphic);
             ParamByName('T003_CODIGO').AsString       :=EdtCodCid.Text;
           ExecSql;
           Close;
@@ -459,7 +457,7 @@ begin
              ParamByName('T001_TELEFONE').AsString     :=EdtTelefone.Text;
              ParamByName('T001_CELULAR').AsString      :=EdtCelular.Text;
              ParamByName('T001_EMAIL').AsString        :=EdtEmail.Text;
-             ParamByName('T001_LOGO').AsString         :=Edtlg.Text;
+             ParamByName('T001_LOGO').Assign(img.Picture.Graphic);
              ParamByName('T003_CODIGO').AsString       :=EdtCodCid.Text;
              Open;
              if (FieldByName('CODIGO').AsInteger <= 0) or (FieldByName('CODIGO').AsString = '') then

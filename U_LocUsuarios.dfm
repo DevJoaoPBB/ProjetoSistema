@@ -295,12 +295,32 @@ object FrmLocUsuario: TFrmLocUsuario
   end
   object Qr: TSQLQuery
     MaxBlobSize = -1
-    Params = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'T002_CODIGO'
+        ParamType = ptInput
+      end>
     SQL.Strings = (
-      '')
+      'SELECT'
+      'T002_CODIGO,'
+      'T002_LOGIN,'
+      'T002_SENHA'
+      'FROM T002_USUARIOS'
+      'WHERE T002_CODIGO =:T002_CODIGO')
     SQLConnection = DmDados.Conexao
     Left = 368
     Top = 74
+    object QrT002_CODIGO: TIntegerField
+      FieldName = 'T002_CODIGO'
+      Required = True
+    end
+    object QrT002_LOGIN: TStringField
+      FieldName = 'T002_LOGIN'
+    end
+    object QrT002_SENHA: TStringField
+      FieldName = 'T002_SENHA'
+    end
   end
   object Ds: TDataSource
     DataSet = Cds
@@ -308,6 +328,7 @@ object FrmLocUsuario: TFrmLocUsuario
     Top = 75
   end
   object Cds: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'Dsp'

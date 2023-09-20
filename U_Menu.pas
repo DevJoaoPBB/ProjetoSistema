@@ -10,8 +10,10 @@ uses
   Datasnap.DBClient, Data.SqlExpr;
 
 var
- CaminhoIni : String;
- Arquivo: TIniFile;
+  CaminhoIni : String;
+  Arquivo: TIniFile;
+  TimeoutConexao: Integer = 10000; // 10 segundos de timeout
+
 type
   TFrmPrincipal = class(TForm)
     MainMenu1: TMainMenu;
@@ -62,11 +64,9 @@ uses
   U_Configs,
   U_CadEmpresa;
 
-
 function TFrmPrincipal.ConectarBanco: Boolean;
 var
   ConectarBanco, NomeBanco : String;
-
 begin
   Result  := False;
   Arquivo := TIniFile.Create(ExtractFilePath(Application.ExeName)+'\Base\Config.ini');
@@ -115,7 +115,7 @@ begin
     on e: exception do
     begin
       Result    := False;
-  end;
+    end;
   end;
 end;
 
@@ -127,60 +127,61 @@ end;
 procedure TFrmPrincipal.FormShow(Sender: TObject);
 begin
   FrmPrincipal.WindowState := wsMaximized;
-
-  if not ConectarBanco then
-  begin
-     Application.MessageBox('Banco de Dados não localizado!','Sistema 1.0', MB_OK+MB_ICONERROR);
-     DmDados.Conexao.Connected := False;
-     FrmConectaBanco.ShowModal;
-
-     if FrmConectaBanco.ModalResult = mrOK then
+  //Lblbase.Caption          := St1.Panels[0].Text;
     begin
-      // O usuário confirmou a configuração, então atualize o caminho do banco no arquivo .ini.
-      Arquivo := TIniFile.Create(ExtractFilePath(Application.ExeName) + '\Base\Config.ini');
-      Arquivo.WriteString('CONEXAO_BASE', 'Database', FrmConectaBanco.CaminhoBanco);
-      try
-    with DmDados.Conexao do
+    if not ConectarBanco then
     begin
-      Connected := False;
-      Params.Clear;
-      Params.Add('DriverUnit=Data.DBXFirebird');
-      Params.Add('DriverPackageLoader=TDBXDynalinkDriverLoader,DbxCommonDriver220.bpl');
-      Params.Add('DriverAssemblyLoader=Borland.Data.TDBXDynalinkDriverLoader,Borland.Data.DbxCommonDriver,Version=22.0.0.0,Culture=neutral,PublicKeyToken=91d62ebb5b0d1b1b');
-      Params.Add('MetaDataPackageLoader=TDBXFirebirdMetaDataCommandFactory,DbxFirebirdDriver220.bpl');
-      Params.Add('MetaDataAssemblyLoader=Borland.Data.TDBXFirebirdMetaDataCommandFactory,Borland.Data.DbxFirebirdDriver,Version=22.0.0.0,Culture=neutral,PublicKeyToken=91d62ebb5b0d1b1b');
-      Params.Add('GetDriverFunc=getSQLDriverINTERBASE');
-      Params.Add('LibraryName=dbxfb.dll');
-      Params.Add('LibraryNameOsx=libsqlfb.dylib');
-      Params.Add('VendorLib=fbclient.dll');
-      Params.Add('VendorLibWin64=fbclient.dll');
-      Params.Add('VendorLibOsx=/Library/Frameworks/Firebird.framework/Firebird');
-      Params.Add('Role=RoleName');
-      Params.Add('MaxBlobSize=-1');
-      Params.Add('TrimChar=False');
-      Params.Add('DriverName=Firebird');
-      Params.Add('Database='+ FrmConectaBanco.CaminhoBanco);
-      Params.Add('RoleName=RoleName');
-      Params.Add('User_Name=sysdba');
-      Params.Add('Password=masterkey');
-      Params.Add('ServerCharSet=WIN1252');
-      Params.Add('SQLDialect=3');
-      Params.Add('ErrorResourceFile=');
-      Params.Add('LocaleCode=0000');
-      Params.Add('BlobSize=-1');
-      Params.Add('CommitRetain=False');
-      Params.Add('WaitOnLocks=True');
-      Params.Add('IsolationLevel=ReadCommitted');
-      Params.Add('Trim Char=False');
-      Open;
-      Connected := True;
-      Arquivo.Free;
+      Application.MessageBox('Não foi possivel estabelecer conexão com banco de dados!','Sistema 1.0', MB_OK+MB_ICONERROR);
+      DmDados.Conexao.Connected := False;
+      FrmConectaBanco.ShowModal;
+      if FrmConectaBanco.ModalResult = mrOK then
+      begin
+        // O usuário confirmou a configuração, então atualize o caminho do banco no arquivo .ini.
+        DmDados.Conexao.Connected := False;
+        Arquivo := TIniFile.Create(ExtractFilePath(Application.ExeName) + '\Base\Config.ini');
+        Arquivo.WriteString('CONEXAO_BASE', 'Database', FrmConectaBanco.CaminhoBanco);
+        try
+          with DmDados.Conexao do
+            begin
+            Params.Clear;
+            Params.Add('DriverUnit=Data.DBXFirebird');
+            Params.Add('DriverPackageLoader=TDBXDynalinkDriverLoader,DbxCommonDriver220.bpl');
+            Params.Add('DriverAssemblyLoader=Borland.Data.TDBXDynalinkDriverLoader,Borland.Data.DbxCommonDriver,Version=22.0.0.0,Culture=neutral,PublicKeyToken=91d62ebb5b0d1b1b');
+            Params.Add('MetaDataPackageLoader=TDBXFirebirdMetaDataCommandFactory,DbxFirebirdDriver220.bpl');
+            Params.Add('MetaDataAssemblyLoader=Borland.Data.TDBXFirebirdMetaDataCommandFactory,Borland.Data.DbxFirebirdDriver,Version=22.0.0.0,Culture=neutral,PublicKeyToken=91d62ebb5b0d1b1b');
+            Params.Add('GetDriverFunc=getSQLDriverINTERBASE');
+            Params.Add('LibraryName=dbxfb.dll');
+            Params.Add('LibraryNameOsx=libsqlfb.dylib');
+            Params.Add('VendorLib=fbclient.dll');
+            Params.Add('VendorLibWin64=fbclient.dll');
+            Params.Add('VendorLibOsx=/Library/Frameworks/Firebird.framework/Firebird');
+            Params.Add('Role=RoleName');
+            Params.Add('MaxBlobSize=-1');
+            Params.Add('TrimChar=False');
+            Params.Add('DriverName=Firebird');
+            Params.Add('Database='+ FrmConectaBanco.CaminhoBanco);
+            Params.Add('RoleName=RoleName');
+            Params.Add('User_Name=sysdba');
+            Params.Add('Password=masterkey');
+            Params.Add('ServerCharSet=WIN1252');
+            Params.Add('SQLDialect=3');
+            Params.Add('ErrorResourceFile=');
+            Params.Add('LocaleCode=0000');
+            Params.Add('BlobSize=-1');
+            Params.Add('CommitRetain=False');
+            Params.Add('WaitOnLocks=True');
+            Params.Add('IsolationLevel=ReadCommitted');
+            Params.Add('Trim Char=False');
+            Open;
+            Connected := True;
+            St1.Panels[0].Text := 'Caminho Banco de Dados: '+ FrmConectaBanco.CaminhoBanco;
+          end;
+          finally
+            Arquivo.Free;
+          end;
+      end;
     end;
-    finally
-
-    end;
-end;
-end;
+  end;
 end;
 
 procedure TFrmPrincipal.S1Click(Sender: TObject);
@@ -200,8 +201,8 @@ end;
 
 procedure TFrmPrincipal.Timer1Timer(Sender: TObject);
 begin
-   St1.Panels[1].Text := '' + FormatDateTime('hh:nn:ss',now);
-   St1.Panels[2].Text := ' ' + FormatDateTime ('dddd" - "dd""/""mm""/""yyyy',now);
+  St1.Panels[1].Text := ''  + FormatDateTime('hh:nn:ss', Now);
+  St1.Panels[2].Text := ' ' + FormatDateTime ('dddd" - "dd""/""mm""/""yyyy', Now);
 end;
 
 procedure TFrmPrincipal.BtPessoasClick(Sender: TObject);

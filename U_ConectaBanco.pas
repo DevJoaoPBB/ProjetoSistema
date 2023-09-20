@@ -18,8 +18,8 @@ type
     BtSair: TBitBtn;
     procedure BtLocalizaBaseClick(Sender: TObject);
     procedure BtConectarClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure BtSairClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   
   private
     FCaminhoBanco: string; // Propriedade para armazenar o caminho do banco
@@ -37,29 +37,31 @@ implementation
 
 uses
 
-U_DmDados,
-U_Menu;
+  U_DmDados,
+  U_Menu;
 
 procedure TFrmConectaBanco.BtLocalizaBaseClick(Sender: TObject);
 begin
   if Od1.Execute then
+  begin
     EdtBase.Text  := Od1.FileName;
+    CaminhoBanco  := Od1.FileName;
+  end;
 end;
 
 procedure TFrmConectaBanco.BtSairClick(Sender: TObject);
 begin
- Application.Terminate;
+  Application.Terminate;
 end;
 
 procedure TFrmConectaBanco.FormShow(Sender: TObject);
 begin
-  Edtbase.Text := DmDados.Conexao.Params.Values['Database'];
-  DmDados.Conexao.Connected := False;
+  EdtBase.Text := DmDados.Conexao.Params.Values['Database'];
 end;
 
 procedure TFrmConectaBanco.BtConectarClick(Sender: TObject);
 begin
-with DmDados.Conexao do
+  with DmDados.Conexao do
     begin
       Connected := False;
       Params.Clear;
@@ -78,7 +80,7 @@ with DmDados.Conexao do
       Params.Add('MaxBlobSize=-1');
       Params.Add('TrimChar=False');
       Params.Add('DriverName=Firebird');
-      Params.Add('Database='+ CaminhoBanco);
+      Params.Add('Database='+ EdtBase.Text);
       Params.Add('RoleName=RoleName');
       Params.Add('User_Name=sysdba');
       Params.Add('Password=masterkey');
@@ -92,63 +94,23 @@ with DmDados.Conexao do
       Params.Add('IsolationLevel=ReadCommitted');
       Params.Add('Trim Char=False');
       Open;
-  try
-    DmDados.Conexao.Connected := True;
+      try
+        DmDados.Conexao.Connected := True;
 
-    // Testa se a conexão foi bem-sucedida
-    if DmDados.Conexao.Connected then
-    begin
-      ShowMessage('Conexão bem-sucedida!');
-      ModalResult := mrOK; // Feche o FrmConectaBanco com resultado OK
-    end
-    else
-    begin
-      ShowMessage('Falha ao conectar com o banco de dados!');
+        if DmDados.Conexao.Connected = True then // Testa se a conexão foi bem-sucedida
+        begin
+          ShowMessage('Conexão bem-sucedida!');
+          ModalResult := mrOK; // Feche o FrmConectaBanco com resultado OK
+        end
+        else
+        begin
+          ShowMessage('Falha ao conectar com o banco de dados!');
+        end;
+
+      finally
+        Arquivo.Free;
+      end;
     end;
-  except
-    on E: Exception do
-    begin
-      ShowMessage('Erro ao conectar com o banco de dados: ' + E.Message);
-    end;
-  end;
-
-    end;
-end;
-
-
-  //CaminhoBanco:= EdtBase.Text;
-  //FrmPrincipal.St1.Panels[0].Text := 'Caminho Banco de Dados: '+ CaminhoBanco;
-  //ModalResult := mrOK; // Feche o FrmConectaBanco com resultado OK
-//end;
-end.
-
-
-
-
-
-
-
-
-
-
-
-
-
- //  DmDados.Conexao.Connected  := False;
-  //DmDados.Conexao.Params.Values['Database'] := Edtbase.Text;
-  //DmDados.Conexao.Connected  := True;
- // FrmPrincipal.St1.Panels[0].Text := EdtBase.Text;
-  //Close;
-end;
-
-procedure TFrmConectaBanco.BtSairClick(Sender: TObject);
-begin
-  Application.Terminate;
-end;
-
-procedure TFrmConectaBanco.FormShow(Sender: TObject);
-begin
-  Edtbase.Text := DmDados.Conexao.Params.Values['Database'];
 end;
 
 end.

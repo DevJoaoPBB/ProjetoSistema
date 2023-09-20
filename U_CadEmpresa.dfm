@@ -1,10 +1,10 @@
 object FrmCadEmpresa: TFrmCadEmpresa
   Left = 385
-  Top = 100
+  Top = 127
   BorderIcons = []
   Caption = 'Cadastro de Empresas'
-  ClientHeight = 521
-  ClientWidth = 557
+  ClientHeight = 494
+  ClientWidth = 523
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,15 +19,15 @@ object FrmCadEmpresa: TFrmCadEmpresa
   TextHeight = 13
   object Panel2: TPanel
     Left = 0
-    Top = 472
-    Width = 557
+    Top = 445
+    Width = 523
     Height = 49
     Align = alBottom
     BevelOuter = bvNone
     Color = 15644558
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 517
+    ExplicitTop = 472
     object BtIncluir: TSpeedButton
       Left = 30
       Top = 3
@@ -1126,13 +1126,12 @@ object FrmCadEmpresa: TFrmCadEmpresa
   object P1: TPanel
     Left = 0
     Top = 0
-    Width = 557
+    Width = 523
     Height = 45
     Align = alTop
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
-    ExplicitWidth = 517
     object Label4: TLabel
       Left = 6
       Top = 12
@@ -1165,8 +1164,8 @@ object FrmCadEmpresa: TFrmCadEmpresa
   object Pg1: TPageControl
     Left = 0
     Top = 45
-    Width = 557
-    Height = 427
+    Width = 523
+    Height = 400
     ActivePage = TbDadosPrinc
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -1176,7 +1175,6 @@ object FrmCadEmpresa: TFrmCadEmpresa
     Font.Style = []
     ParentFont = False
     TabOrder = 2
-    ExplicitTop = 44
     object TbDadosPrinc: TTabSheet
       Caption = 'Dados Principais'
       Font.Charset = DEFAULT_CHARSET
@@ -1185,7 +1183,6 @@ object FrmCadEmpresa: TFrmCadEmpresa
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      ExplicitWidth = 509
       object Label1: TLabel
         Left = 6
         Top = 12
@@ -1540,7 +1537,7 @@ object FrmCadEmpresa: TFrmCadEmpresa
       end
       object EdtUf: TEdit
         Left = 356
-        Top = 151
+        Top = 149
         Width = 32
         Height = 24
         Font.Charset = DEFAULT_CHARSET
@@ -1569,15 +1566,22 @@ object FrmCadEmpresa: TFrmCadEmpresa
         Text = '     -   '
       end
     end
-    object TbDadosAdc: TTabSheet
-      Caption = 'Dados Adicionais'
-      ImageIndex = 1
-      ExplicitWidth = 509
-    end
     object TbLogo: TTabSheet
       Caption = 'Logo'
       ImageIndex = 2
-      ExplicitWidth = 509
+      object Label16: TLabel
+        Left = 3
+        Top = 40
+        Width = 343
+        Height = 16
+        Caption = 'Clique duas vezes no campo abaixo para selecionar a logo:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
       object Panel3: TPanel
         Left = 0
         Top = 72
@@ -1599,15 +1603,6 @@ object FrmCadEmpresa: TFrmCadEmpresa
           ExplicitHeight = 105
         end
       end
-      object Edtlg: TEdit
-        Left = 3
-        Top = 44
-        Width = 220
-        Height = 22
-        ReadOnly = True
-        TabOrder = 1
-        Visible = False
-      end
     end
   end
   object Qr: TSQLDataSet
@@ -1625,8 +1620,8 @@ object FrmCadEmpresa: TFrmCadEmpresa
         ParamType = ptInput
       end>
     SQLConnection = DmDados.Conexao
-    Left = 464
-    Top = 89
+    Left = 400
+    Top = 49
     object QrT001_CODIGO: TIntegerField
       FieldName = 'T001_CODIGO'
       Required = True
@@ -1695,8 +1690,8 @@ object FrmCadEmpresa: TFrmCadEmpresa
         ParamType = ptInput
       end>
     SQLConnection = DmDados.Conexao
-    Left = 504
-    Top = 88
+    Left = 440
+    Top = 48
     object QrCidadeT003_CODIGO: TIntegerField
       FieldName = 'T003_CODIGO'
       Required = True
@@ -1719,7 +1714,8 @@ object FrmCadEmpresa: TFrmCadEmpresa
     end
   end
   object Opd1: TOpenPictureDialog
-    Left = 420
-    Top = 94
+    Filter = 'Bitmaps (*.bmp)|*.bmp'
+    Left = 348
+    Top = 46
   end
 end
