@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2023/07/27 14:36:45.000.838,=C:\Users\Suporte 03\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/07/27 16:09:28.000.611,=C:\Users\Suporte 03\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/08/21 14:26:01.000.965,=C:\Users\Suporte 03\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/08/21 14:27:01.000.974,C:\Users\Suporte 03\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Sistema\U_Menu.pas</Transaction>
+    <Transaction>2023/08/21 14:27:01.000.974,C:\Users\Suporte 03\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Sistema\U_Menu.dfm</Transaction>
+    <Transaction>2023/08/21 14:27:05.000.760,C:\Users\Suporte 03\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Sistema\Sistema.dproj</Transaction>
+    <Transaction>2023/08/21 14:32:29.000.194,=C:\Sistema\Unit1.pas</Transaction>
+    <Transaction>2023/08/21 14:33:31.000.599,C:\Sistema\U_DmDados.dfm=C:\Sistema\Unit1.dfm</Transaction>
+    <Transaction>2023/08/21 14:33:31.000.599,C:\Sistema\U_DmDados.pas=C:\Sistema\Unit1.pas</Transaction>
+    <Transaction>2023/08/21 15:37:28.000.474,=C:\Sistema\Unit1.pas</Transaction>
+    <Transaction>2023/08/21 15:37:50.000.973,C:\Sistema\Unit1.pas=C:\Sistema\U_CadUsuario.pas</Transaction>
+    <Transaction>2023/08/21 15:37:50.000.973,C:\Sistema\Unit1.dfm=C:\Sistema\U_CadUsuario.dfm</Transaction>
+    <Transaction>2023/08/21 16:11:33.000.721,=C:\Sistema\Unit1.pas</Transaction>
+    <Transaction>2023/08/21 16:12:17.000.876,C:\Sistema\Unit1.dfm=C:\Sistema\U_LocUsuarios.dfm</Transaction>
+    <Transaction>2023/08/21 16:12:17.000.876,C:\Sistema\Unit1.pas=C:\Sistema\U_LocUsuarios.pas</Transaction>
+    <Transaction>2023/08/23 16:01:42.000.372,=C:\Sistema\Unit1.pas</Transaction>
+    <Transaction>2023/08/23 16:01:58.000.087,C:\Sistema\U_CadCliente.pas=C:\Sistema\Unit1.pas</Transaction>
+    <Transaction>2023/08/23 16:01:58.000.087,C:\Sistema\U_CadCliente.dfm=C:\Sistema\Unit1.dfm</Transaction>
+    <Transaction>2023/08/23 16:06:44.000.687,=C:\Sistema\Unit1.pas</Transaction>
+    <Transaction>2023/08/23 16:07:21.000.516,=C:\Sistema\Unit1.pas</Transaction>
+    <Transaction>2023/08/23 16:07:30.000.520,C:\Sistema\U_CadEmpresa.dfm=C:\Sistema\Unit1.dfm</Transaction>
+    <Transaction>2023/08/23 16:07:30.000.520,C:\Sistema\U_CadEmpresa.pas=C:\Sistema\Unit1.pas</Transaction>
+    <Transaction>2023/08/29 09:17:09.000.809,=C:\Sistema\Unit1.pas</Transaction>
+    <Transaction>2023/08/29 09:17:18.000.333,C:\Sistema\Unit1.dfm=C:\Sistema\U_Configs.dfm</Transaction>
+    <Transaction>2023/08/29 09:17:18.000.333,C:\Sistema\Unit1.pas=C:\Sistema\U_Configs.pas</Transaction>
+    <Transaction>2023/09/06 14:31:05.000.916,=C:\Sistema\Unit1.pas</Transaction>
+    <Transaction>2023/09/06 14:31:13.000.283,C:\Sistema\Unit1.pas=C:\Sistema\U_Vendas.pas</Transaction>
+    <Transaction>2023/09/06 14:31:13.000.284,C:\Sistema\Unit1.dfm=C:\Sistema\U_Vendas.dfm</Transaction>
+    <Transaction>2023/09/18 16:18:36.000.649,=C:\Sistema\Unit1.pas</Transaction>
+    <Transaction>2023/09/18 16:18:44.000.653,C:\Sistema\U_LocEmpresa.dfm=C:\Sistema\Unit1.dfm</Transaction>
+    <Transaction>2023/09/18 16:18:44.000.653,C:\Sistema\U_LocEmpresa.pas=C:\Sistema\Unit1.pas</Transaction>
+    <Transaction>2023/09/18 21:43:41.000.992,=C:\Sistema\Unit1.pas</Transaction>
+    <Transaction>2023/09/18 21:43:50.000.487,C:\Sistema\U_ConectaBanco.pas=C:\Sistema\Unit1.pas</Transaction>
+    <Transaction>2023/09/18 21:43:50.000.487,C:\Sistema\U_ConectaBanco.dfm=C:\Sistema\Unit1.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
